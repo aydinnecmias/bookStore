@@ -1,7 +1,9 @@
+using bookStore.DBOperations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,12 +28,15 @@ namespace bookStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "bookStore", Version = "v1" });
             });
+
+            services.AddDbContext<BookStoreDbContext>(options=> options.UseInMemoryDatabase(databaseName: "BookStoreDB"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
