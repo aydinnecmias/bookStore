@@ -33,7 +33,7 @@ namespace bookStore.DBOperations
                     {
                         
                         Title = "Ben Robot",
-                        GenreId = 1,
+                        GenreId = 2,
                         PageCount = 500,
                         PublishDate = new DateTime(2001, 06, 12)
 
@@ -42,7 +42,7 @@ namespace bookStore.DBOperations
                     {
                        
                         Title = "Kararsızlar",
-                        GenreId = 1,
+                        GenreId = 3,
                         PageCount = 2300,
                         PublishDate = new DateTime(2001, 06, 12)
 
