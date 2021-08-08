@@ -45,19 +45,12 @@ namespace bookStore.Controllers
 
         public IActionResult GetById(int id)
         {
-            BookDetailViewModel result;
-            try
-            {
+                BookDetailViewModel result;
+           
                 GetBookDetailQuery query = new GetBookDetailQuery(_context, _mapper);
                 query.BookId = id;
                 result = query.Handle();
-            }
-            catch (Exception ex )
-            {
-
-                
-                return BadRequest(ex.Message);
-            }
+           
             return Ok(result);
            
            
@@ -69,8 +62,7 @@ namespace bookStore.Controllers
         public IActionResult AddBook([FromBody] CreateBookModel newBook)
         {
             CreateBookCommand command = new CreateBookCommand(_context, _mapper);
-            try
-            {
+            
                 command.Model = newBook;
 
                 CreateBookCommandValidator validator = new CreateBookCommandValidator();
@@ -87,15 +79,6 @@ namespace bookStore.Controllers
                 //     command.Handle();
 
                 //}
-
-
-
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            
              
             return Ok();
 
@@ -105,8 +88,7 @@ namespace bookStore.Controllers
 
         public IActionResult UpdateBook(int id, [FromBody] UpdateBookModel UpdatedBook)
         {
-            try
-            {
+           
                 UpdateBookCommand command = new UpdateBookCommand(_context);
                 command.BookId = id;
                 UpdateBookCommandValidator validator = new UpdateBookCommandValidator();                
@@ -114,13 +96,6 @@ namespace bookStore.Controllers
                 validator.ValidateAndThrow(command);
                 command.Handle();
 
-
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
            
             return Ok();
 
@@ -130,21 +105,13 @@ namespace bookStore.Controllers
 
         public IActionResult DeleteBook(int id)
         {
-            
-
-            try
-            {
+   
                 DeleteBookCommand command = new DeleteBookCommand(_context);
                 command.BookId = id;
                 DeleteBookCommandValidator validator = new DeleteBookCommandValidator();
                 validator.ValidateAndThrow(command);
                 command.Handle();
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
+           
             return Ok();
 
 
