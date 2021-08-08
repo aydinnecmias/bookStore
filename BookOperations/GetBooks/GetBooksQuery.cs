@@ -2,6 +2,7 @@
 using bookStore.DBOperations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,6 +37,7 @@ namespace bookStore.BookOperations.GetBooks
 
     public class BooksViewModel
     {
+       
         public string Title { get; set; }
         public int PageCount { get; set; }
         public string PublishDate { get; set; }

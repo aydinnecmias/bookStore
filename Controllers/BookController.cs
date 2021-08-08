@@ -109,7 +109,9 @@ namespace bookStore.Controllers
             {
                 UpdateBookCommand command = new UpdateBookCommand(_context);
                 command.BookId = id;
+                UpdateBookCommandValidator validator = new UpdateBookCommandValidator();                
                 command.Model = UpdatedBook;
+                validator.ValidateAndThrow(command);
                 command.Handle();
 
 

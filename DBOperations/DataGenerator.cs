@@ -22,7 +22,7 @@ namespace bookStore.DBOperations
 
                     new Book
                     {
-                       
+                        
                         Title = "Lean Startup",
                         GenreId = 1,
                         PageCount = 200,

@@ -1,4 +1,6 @@
 using bookStore.DBOperations;
+using bookStore.Middlewares;
+using bookStore.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,7 +40,7 @@ namespace bookStore
 
             services.AddDbContext<BookStoreDbContext>(options=> options.UseInMemoryDatabase(databaseName: "BookStoreDB"));
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
+            services.AddSingleton<ILoggerService, ConsoleLogger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +58,8 @@ namespace bookStore
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCustomExceptionMiddle();
 
             app.UseEndpoints(endpoints =>
             {
