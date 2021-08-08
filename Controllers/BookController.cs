@@ -5,6 +5,8 @@ using bookStore.BookOperations.GetBookDetail;
 using bookStore.BookOperations.GetBooks;
 using bookStore.BookOperations.UpdateBook;
 using bookStore.DBOperations;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -70,7 +72,23 @@ namespace bookStore.Controllers
             try
             {
                 command.Model = newBook;
+
+                CreateBookCommandValidator validator = new CreateBookCommandValidator();
+                validator.ValidateAndThrow(command);
                 command.Handle();
+
+                //if(!result.IsValid)
+                //    foreach(var item in result.Errors)
+                //    {
+                //        Console.WriteLine("Özellik " + item.PropertyName + "- Error Message: " + item.ErrorMessage );
+                //    }
+                //else
+                //{ 
+                //     command.Handle();
+
+                //}
+
+
 
             }
             catch (Exception ex)
@@ -116,6 +134,8 @@ namespace bookStore.Controllers
             {
                 DeleteBookCommand command = new DeleteBookCommand(_context);
                 command.BookId = id;
+                DeleteBookCommandValidator validator = new DeleteBookCommandValidator();
+                validator.ValidateAndThrow(command);
                 command.Handle();
             }
             catch (Exception ex)
